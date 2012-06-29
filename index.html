@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PPDB Jalur Akademik 2012 - SMA Negeri 2 Bandung</title>
+	
+	<link rel="stylesheet" href="./css/reset.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="./css/ppdb.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" type="text/css" media="all" />
+	<link rel="shortcut icon" href="./images/favicon.png" />
+	
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
+	<script src="./js/jquery.js"></script>
+	<script src="./js/ppdb.js?v=1.2"></script>
+</head>
+<body>
+	<div id="header">
+		<h1>PPDB Jalur Akademik 2012 - SMA Negeri 2 Bandung</h1>
+	</div>
+	<div id="subheader">
+		<ul>
+			<li onclick="javascript:switchpage('1')" class="menupage1 active">Beranda</li>
+			<li onclick="javascript:switchpage('2')" class="menupage2">Pencarian</li>
+			<li onclick="javascript:switchpage('3')" class="menupage3">Daftar Perubahan Data</li>
+			<li onclick="javascript:switchpage('4')" class="menupage4">Statistik Pilihan Kedua</li>
+			<li id="update"><span class="updating"></span>Update: <strong>[ loading ]</strong></li>
+		</ul>
+		<div class="cl"></div>
+	</div>
+	<div id="main">
+		<div id="rekap" class="box">
+			<h2><span>Progress Entri Data Lokal SMA Negeri 2 Bandung</span><span class="updating"></span></h2>
+			<table>
+				<thead>
+					<tr>
+						<th colspan="3">Dalam Kota</th>
+						<th colspan="3" style="border-left: 1px solid #fff;">Luar Kota</th>
+					</tr>
+					<tr>
+						<th>Jumlah Pendaftar</th>
+						<th>Nilai Tertinggi</th>
+						<th>Nilai Terendah</th>
+						<th style="border-left: 1px solid #fff;">Jumlah Pendaftar</th>
+						<th>Nilai Tertinggi</th>
+						<th>Nilai Terendah</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>0</td>
+						<td>0.00</td>
+						<td>0.00</td>
+						<td>0</td>
+						<td>0.00</td>
+						<td>0.00</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							<sup>1</sup> Jumlah pendaftar adalah total seluruh pendaftar PPDB Jalur Akademik. <strong>Bukan kuota pendaftaran.</strong><br />
+							<sup>2</sup> Nilai tertinggi merupakan nilai tertinggi dari seluruh pendaftar yang ada di lingkup tersebut.<br />
+							<sup>3</sup> Nilai terendah merupakan nilai terendah dari seluruh pendaftar yang ada di lingkup tersebut. <strong>Bukan passing grade.</strong><br />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="page1">
+			<div id="latest" class="box">
+				<h2><span>5 Pendaftar Terakhir.</span> Entri terakhir yang diinput di pusat data.<span class="updating">Memperbarui data...</span></h2>
+				<table>
+					
+				</table>
+			</div>
+			<div id="data" class="box">
+				<h2><span>Posisi Peserta.</span> Posisi peserta dari database.<span class="updating">Memperbarui data...</span></h2>
+				<table>
+					
+				</table>
+			</div>
+		</div>
+		<div id="page2" style="display: none;">
+			<div class="box">
+				<h2><span>Pencarian Berdasarkan Nomor Pendaftaran.</span> Masukkan nomor pendaftaran Anda.</h2>
+				
+			</div>
+			<div class="box">
+				<h2><span>Pencarian Berdasarkan Nama.</span> Masukkan nama Anda.</h2>
+				
+			</div>
+			<div class="box">
+				<h2><span>Pencarian Berdasarkan Rentangan Nilai.</span> Masukkan rentang nilai yang ingin dicari.</h2>
+				
+			</div>
+		</div>
+		<div id="page3" style="display: none;">
+			<div class="box">
+				<h2><span>Daftar Perubahan Data.</span> Rekapitulasi perubahan data yang dikirim ke Bandung Cyber Community.</h2>
+				
+			</div>
+		</div>
+		<div id="page4" style="display: none;">
+			<div class="box">
+				<h2><span>Statistik Pilihan Kedua.</span> Statistik pilihan kedua yang dipilih oleh para pendaftar.</h2>
+				
+			</div>
+		</div>
+	</div>
+	<div id="legend">
+		<h3>Keterangan Tabel:</h3>
+		<p class="dalam"><span></span> Kota Bandung</p>
+		<p class="luar"><span></span> Luar Kota Bandung</p>
+	</div>
+	<div id="popup">
+		<div id="detil" class="box">
+			<div class="close">&times;</div><h2><span>Data Pendaftar.</span> Data lengkap dari pendaftar yang sudah dipilih.</h2>
+			<div class="load_big"></div>
+			<table id="detil_pribadi"></table>
+			<table id="detil_nilai"></table>
+			<table id="detil_posisi"></table>
+		</div>
+	</div>
+	<div id="footer">
+		<marquee behavior="scroll" direction="left">&copy; 2012 &ndash; Divisi Pengembangan Teknologi Informasi dan Komunikasi, SMA Negeri 2 Bandung. Modul viewer database oleh Muhammad Saiful Islam. Aplikasi ini juga dapat diakses di <strong>http://ppdb.sman2bdg.sch.id/</strong></marquee>
+	</div>
+</body>
+</html>
+
+<!-- Aku belum bisa melupakanmu seutuhnya, Anjani... dan selamat berbahagia :') -->

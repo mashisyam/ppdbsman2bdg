@@ -1,0 +1,241 @@
+/**
+ * Sistem Informasi Perkembangan Pendaftaran Penerimaan Peserta Didik Baru 2012
+ * Sekolah Menengah Atas (SMA) Negeri 2 Bandung
+ * Jalan Cihampelas no. 173 Bandung 40131 - Telp. (022) 2032462
+ * 
+ * Dikelola oleh Divisi Teknologi Informasi dan Komunikasi - SMA Negeri 2 Bandung
+ * Sistem dibuat oleh Muhammad Saiful Islam <muhammad@saiful.web.id>
+ */
+
+body {
+	background: url('./../images/bg.jpg') fixed repeat-x;
+	font-family: "Open Sans", sans-serif;
+	font-size: 13px;
+	margin-bottom: 40px;
+}
+.cl { clear: both; }
+#header {
+	background: url('./../images/header_bg.jpg') fixed repeat-x;
+	padding: 15px;
+}
+#header h1 {
+	width: 900px;
+	height: 60px;
+	text-indent: -99999999em;
+	background: url('./../images/logo.png') no-repeat top left;
+	margin: 0 auto;
+}
+
+#subheader {
+	background: #e8f5e2;
+	border-top: 1px solid #92bc64;
+	border-bottom: 1px solid #92bc64;
+	padding: 8px 0;
+	margin: 1px 0 0;
+}
+#subheader ul {
+	width: 900px;
+	margin: 0 auto;
+	list-style: none;
+}
+#subheader ul li {
+	float: left;
+	margin-right: 15px;
+	cursor: pointer;
+}
+#subheader ul li:last-child {
+	float: right;
+	margin: 0;
+}
+#subheader ul li:last-child .updating {
+	float: none;
+	margin-right: 5px;
+}
+#subheader ul li.active {
+	font-weight: 700;
+	color: #538919;
+}
+.box {
+	width: 880px;
+	padding: 10px;
+	margin: 15px auto;
+	border: 1px solid #92bc64;
+	background: #fff;
+}
+h2 {
+	font-weight: 300;
+	font-size: 17px;
+}
+h2 span {
+	font-weight: 600;
+}
+
+#update {
+	font-size: 13px;
+}
+.updating {
+	float: right;
+	padding-right: 22px;
+	background: url('./../images/loading_small.gif') no-repeat center right;
+	font-weight: 600;
+	display: none;
+	font-size: 13px;
+}
+#main table {
+	margin: 10px -10px -10px;
+	width: 900px;
+}
+#main thead tr {
+	background: #538919;
+	color: #fff;
+}
+#main tr th, #main tr td {
+	padding: 5px 0;
+	line-height: 1.5em;
+}
+#main tr td { cursor: pointer; }
+#main tbody tr {
+	border-bottom: 1px solid #cbeaa9;
+}
+#main tbody tr:last-child {
+	border: none;
+}
+#main tbody tr.luar {
+	background: #acd373;
+}
+#main tbody tr:hover {
+	background: #44b0db;
+}
+#main tbody tr.luar:hover {
+	background: #538919;
+}
+
+#legend {
+	position: fixed;
+	z-index: 1;
+	background: #fff;
+	border: 1px solid #92bc64;
+	bottom: 35px;
+	right: 15px;
+	padding: 5px 10px;
+	line-height: 1.5em;
+	font-size: 12px;
+	box-shadow: 0 0 10px #aaa;
+	-moz-box-shadow: 0 0 10px #aaa;
+}
+#legend h3 {
+	font-weight: 600;
+}
+#legend p span {
+	display: inline-block;
+	border: 1px solid #92bc64;
+	height: 10px;
+	width: 10px;
+	margin-right: 3px;
+}
+#legend p.luar span { background: #acd373; }
+
+#popup {
+	background: rgba(0,0,0,0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	height: 100%;
+	width: 100%;
+	display: none;
+}
+#popup .box {
+	width: 600px;
+	margin-top: 30px;
+	max-height: 85%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+#popup .close {
+	float: right;
+	font-size: 36px;
+	font-weight: bold;
+	margin: -10px 0 0;
+	cursor: pointer;
+}
+
+#detil table {
+	margin: 15px -10px;
+	width: 620px;
+	line-height: 2em;
+}
+#detil table tr {
+	border-top: 1px solid #92bc64;
+	border-bottom: 1px solid #92bc64;
+}
+#detil table th, #detil table td {
+	padding-left: 10px;
+}
+#detil table th {
+	text-align: left;
+	width: 200px;
+}
+#detil table:last-child {
+	margin-bottom: 0;
+}
+.load_big {
+	width: 100px;
+	height: 100px;
+	margin: 50px auto;
+	background: url('./../images/loading_big.gif') no-repeat;
+	display: none;
+}
+
+#rekap h2 { text-align: center; }
+#rekap span {
+	display: block;
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 3px;
+	text-transform: uppercase;
+}
+#rekap th {
+	border-bottom: 1px solid #fff;
+}
+#rekap tr:first-child td {
+	text-align: center;
+	font-weight: 700;
+	font-size: 48px;
+	padding: 15px 0;
+	border-left: 1px solid #92bc64;
+	border-right: 1px solid #92bc64;
+	letter-spacing: -2px;
+	line-height: 1em;
+}
+#rekap tr:last-child td {
+	padding: 10px;
+	line-height: 1.3em;
+}
+#rekap sup {
+	font-size: 11px;
+	position: relative;
+	top: -3px;
+}
+#rekap tbody tr {
+	border-bottom: 1px solid #92bc64;
+}
+#rekap tr:first-child td:first-child { border-left: none; }
+#rekap tr:first-child td:last-child { border-right: none; }
+#rekap tbody tr:hover { background: inherit; }
+#rekap tr td { cursor: default; }
+
+#footer {
+	background: #385716;
+	opacity: 0.9;
+	padding: 3px 0;
+	color: #fff;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	font-size: 12px;
+	line-height: 16px;
+	box-shadow: 0 0 10px #000a;
+	-moz-box-shadow: 0 0 10px #000; 
+}
