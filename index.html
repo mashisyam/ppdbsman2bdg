@@ -20,15 +20,15 @@
 		<ul>
 			<li onclick="javascript:switchpage('1')" class="menupage1 active">Beranda</li>
 			<li onclick="javascript:switchpage('2')" class="menupage2">Pencarian</li>
-			<li onclick="javascript:switchpage('3')" class="menupage3">Daftar Perubahan Data</li>
+			<li onclick="javascript:switchpage('3')" class="menupage3">Daftar Koreksi Data</li>
 			<li onclick="javascript:switchpage('4')" class="menupage4">Statistik Pilihan Kedua</li>
-			<li id="update"><span class="updating"></span>Update: <strong>[ loading ]</strong></li>
+			<li id="update"><span class="updating"></span>Update: <strong class="update_data">[ loading ]</strong>. Versi viewer: <strong class="versi_app">0.0</strong></li>
 		</ul>
 		<div class="cl"></div>
 	</div>
 	<div id="main">
 		<div id="rekap" class="box">
-			<h2><span>Progress Entri Data Lokal SMA Negeri 2 Bandung</span><span class="updating"></span></h2>
+			<h2>Progress Entri Data Lokal SMA Negeri 2 Bandung</h2>
 			<table>
 				<thead>
 					<tr>
@@ -93,7 +93,7 @@
 		</div>
 		<div id="page3" style="display: none;">
 			<div class="box">
-				<h2><span>Daftar Perubahan Data.</span> Rekapitulasi perubahan data yang dikirim ke Bandung Cyber Community.</h2>
+				<h2><span>Daftar Koreksi Data.</span> Rekapitulasi koreksi data yang ditemukan dan dikirim ke Bandung Cyber Community.</h2>
 				
 			</div>
 		</div>
@@ -121,6 +121,7 @@
 	<div id="footer">
 		<marquee behavior="scroll" direction="left">&copy; 2012 &ndash; Divisi Pengembangan Teknologi Informasi dan Komunikasi, SMA Negeri 2 Bandung. Modul viewer database oleh Muhammad Saiful Islam. Aplikasi ini juga dapat diakses di <strong>http://ppdb.sman2bdg.sch.id/</strong></marquee>
 	</div>
+<audio src="./audio/update.wav" id="audioupdate" />
 </body>
 </html>
 

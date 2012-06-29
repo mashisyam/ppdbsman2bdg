@@ -51,7 +51,7 @@ function tanggal_pendaftaran(data) {
 function table_maker(table, array, jenis) {
 	var tr = '',
 	    o  = '<thead><tr><th width="100">';
-	    o += (jenis == 'last' ? 'ID Database' : 'Posisi');
+	    o += (jenis == 'last' ? 'ID Database' : 'Posisi Global');
 	    o += '</th><th width="100">ID Pendaftar</th><th width="300">Nama Lengkap</th><th>Asal Sekolah</th><th width="60">Nilai</th><th width="80">Detil</th></tr></thead><tbody>';
 	
 	var data = $.parseJSON(array);
@@ -112,11 +112,12 @@ function cek_update() {
 	$.get(utama + 'updated.php', function(data) {
 		if (data == 'error koneksi') {
 			koneksi = false;
-			$('#update strong').html('Koneksi gagal. Mencoba re-connect beberapa saat lagi.');
-		} else if ($('#update strong').html() !== data) {
+			$('#update strong.update_data').html('Koneksi gagal. Mencoba re-connect beberapa saat lagi.');
+		} else if ($('#update strong.update_data').html() !== data) {
 			koneksi = true;
 			
-			$('#update strong').html(data);
+			$('#update strong.update_data').html(data);
+			update_ring();
 			
 			latest_entries();
 			panggil_data();
@@ -126,7 +127,8 @@ function cek_update() {
 	});
 }
 function cek_app() {
-	$.get('./versi.txt', function(data) {
+	$.get('./versi.txt?v=' + new Date().getTime(), function(data) {
+		$('#update strong.versi_app').html(data);
 		if (versi == '') {
 			versi = data;
 			//console.log('sama');
@@ -134,7 +136,8 @@ function cek_app() {
 			//console.log('sudah diset');
 			if (versi !== data) {
 				//console.log('beda');
-				window.location.reload();
+				//window.location.reload();
+				location.reload(true);
 			} else {
 				//console.log('sama');
 			}
@@ -204,15 +207,22 @@ function switchpage(page) {
 		$('#page' + page).fadeIn('slow');
 	}, 500);
 }
+function update_ring() {
+	var sound = document.getElementById('audioupdate');
+	if (sound) sound.play();
+}
 
 /** All system ready. Run up! */
 $(function() {
+	/** Initial checks. */
 	cek_update();
+	cek_app();
 	
 	/** Update setiap 5 detik * 1.000 ms = 30.000 ms */
 	setInterval('cek_update()', 5000);
-	setInterval('cek_app()', 60000);
+	setInterval('cek_app()', 5000);
 	
+	/** Kode untuk close popup. */
 	$('#popup .close').click(function() {
 		$('#popup').fadeOut('slow');
 	});

@@ -187,13 +187,18 @@ h2 span {
 	display: none;
 }
 
-#rekap h2 { text-align: center; }
-#rekap span {
+#rekap h2 {
 	display: block;
 	font-size: 20px;
 	font-weight: 700;
 	margin-bottom: 3px;
 	text-transform: uppercase;
+	text-align: center;
+}
+#rekap .updating {
+	width: 22px;
+	padding: 0;
+	height: 22px;
 }
 #rekap th {
 	border-bottom: 1px solid #fff;
