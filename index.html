@@ -56,9 +56,10 @@
 					</tr>
 					<tr>
 						<td colspan="6">
-							<sup>1</sup> Jumlah pendaftar adalah total seluruh pendaftar PPDB Jalur Akademik. <strong>Bukan kuota pendaftaran.</strong><br />
+							<sup>1</sup> Jumlah pendaftar adalah total seluruh pendaftar PPDB Jalur Akademik. <strong style="color: red">BUKAN QUOTA PENDAFTARAN!!!</strong><br />
 							<sup>2</sup> Nilai tertinggi merupakan nilai tertinggi dari seluruh pendaftar yang ada di lingkup tersebut.<br />
-							<sup>3</sup> Nilai terendah merupakan nilai terendah dari seluruh pendaftar yang ada di lingkup tersebut. <strong>Bukan passing grade.</strong><br />
+							<sup>3</sup> Nilai terendah merupakan nilai terendah dari seluruh pendaftar yang ada di lingkup tersebut. <strong style="color: red">BUKAN PASSING GRADE!!!</strong><br />
+							<sup>4</sup> Ada <span id="count_koreksi" style="font-weight: bold; font-family: monospace; font-size: 14px;">0</span> koreksi data yang telah diperbaiki oleh panitia. Klik "Daftar Koreksi Data" di atas untuk mengetahuinya.
 						</td>
 					</tr>
 				</tbody>
@@ -105,9 +106,12 @@
 			</div>
 		</div>
 		<div id="page3" style="display: none;">
-			<div class="box">
-				<h2><span>Daftar Koreksi Data.</span> Rekapitulasi koreksi data yang ditemukan dan dikirim ke Bandung Cyber Community.</h2>
-				
+			<div id="koreksi" class="box">
+				<h2><span>Daftar Koreksi Data.</span> Rekapitulasi koreksi data yang ditemukan dan dikirim ke Bandung Cyber Community.<span class="updating">Memperbarui data...</span></h2>
+				<table>
+					<thead><tr><th width="50">No.</th><th width="150">Timestamp</th><th>Keterangan</th><th width="200">Korektor</th></tr></thead>
+					<tbody></tbody>
+				</table>
 			</div>
 		</div>
 		<div id="page4" style="display: none;">
@@ -138,7 +142,7 @@
 		</div>
 	</div>
 	<div id="footer">
-		<marquee behavior="scroll" direction="left">&copy; 2012 &ndash; Divisi Pengembangan Teknologi Informasi dan Komunikasi, SMA Negeri 2 Bandung. Modul viewer database oleh Muhammad Saiful Islam. Aplikasi ini juga dapat diakses di <strong>http://ppdb.sman2bdg.sch.id/</strong></marquee>
+		<marquee behavior="scroll" direction="left" scrollamount="7">&copy; 2012 &ndash; Divisi Pengembangan Teknologi Informasi dan Komunikasi, SMA Negeri 2 Bandung. Modul viewer database oleh Muhammad Saiful Islam. Aplikasi ini juga dapat diakses di <strong>http://ppdb.sman2bdg.sch.id/</strong> (rate update tidak secepat bila dilihat di lingkungan SMAN 2 Bandung).</marquee>
 	</div>
 <audio src="./audio/update.wav" id="audioupdate" />
 </body>

@@ -8,7 +8,7 @@
  */
 
 var utama = './php/',
-    koneksi = true,
+    filter_pil2 = '',
     versi = '';
 
 function tanggal_indonesia(data) {
@@ -55,18 +55,25 @@ function table_maker(table, array, jenis) {
 	    o += (jenis == 'last' ? 'ID Database' : (jenis == 'filter' ? 'Nomor' : 'Posisi Global'));
 	    o += '</th><th width="100">ID Pendaftar</th><th width="300">Nama Lengkap</th><th>Asal Sekolah</th><th width="60">Nilai</th><th width="80">Detil</th></tr></thead><tbody>';
 	
-	var data = $.parseJSON(array);
-	$.each(data, function(k,a) {
-		tr =  "<tr onclick=\"javascript:detil('" + a.no_pendaftaran + "')\"";
-		tr += (a.asal_pendaftar == '1' ? ' class="luar">' : '>');
-		tr += '<td align="center">' + (jenis == 'last' ? (a.id - 1) : a.id) + '</td>';
-		tr += '<td align="center">' + a.no_pendaftaran + (a.asal_pendaftar == '1' ? '*' : '') + '</td>';
-		tr += '<td>' + a.nama_pendaftar + '</td>';
-		tr += '<td>' + a.asal_sekolah + '</td>';
-		tr += '<td align="center">' + a.n_total + '</td>';
-		tr += '<td align="center">Klik di sini</td>';
-		o += tr;
-	});
+	if (array == '[]') {
+		o += '<tr><td align="center" colspan="6" style="cursor: auto; ">Tidak ada data.</td></tr>';
+	} else {
+		var data = $.parseJSON(array);
+		
+		if (jenis == 'last') data.sort(function(a,b) { return b.id - a.id });
+		
+		$.each(data, function(k,a) {
+			tr =  "<tr onclick=\"javascript:detil('" + a.no_pendaftaran + "')\"";
+			tr += (a.asal_pendaftar == '1' ? ' class="luar">' : '>');
+			tr += '<td align="center">' + (jenis == 'last' ? (a.id - 1) : a.id) + '</td>';
+			tr += '<td align="center">' + a.no_pendaftaran + (a.asal_pendaftar == '1' ? '' : '') + '</td>';
+			tr += '<td>' + a.nama_pendaftar + '</td>';
+			tr += '<td>' + a.asal_sekolah + '</td>';
+			tr += '<td align="center">' + a.n_total + '</td>';
+			tr += '<td align="center">Klik di sini</td>';
+			o += tr;
+		});
+	}
 	
 	table.html(o + data + '</tbody>');
 }
@@ -84,6 +91,24 @@ function pilihan_kedua() {
 		
 		$('#pilihankedua tbody').html(o);
 		$('#pilihankedua .updating').hide();
+	});
+}
+function koreksi() {
+	$('#koreksi .updating').show();
+	
+	$.get(utama + 'koreksi.php', function(data) {
+		var array = $.parseJSON(data), tr = '', o = '', i = 0;
+		
+		$.each(array, function(k,a) {
+			tr  = "<tr>";
+			tr += '<td align="center">' + a.id + '</td><td align="center">' + a.date + '</td><td>' + a.keterangan + '</td><td>' + a.editor + '</td></tr>';
+			o += tr;
+			i++;
+		});
+		
+		$('#koreksi tbody').html(o);
+		$('#count_koreksi').html(i);
+		$('#koreksi .updating').hide();
 	});
 }
 function latest_entries() {
@@ -107,6 +132,7 @@ function filter(kriteria, penentu, holder_isi, holder_update, holder_penentu) {
 }
 function detil_pil_2(sekolah) {
 	$('#detilkedua').fadeIn('slow');
+	filter_pil2 = sekolah;
 	filter('pilihan_2', sekolah, $('#detilkedua table'), $('#detilkedua .updating'), $('#detilkedua h2 strong'));
 }
 function rentang(awal, akhir) {
@@ -161,17 +187,16 @@ function cek_update() {
 	$('#update .updating').show();
 	$.get(utama + 'updated.php', function(data) {
 		if (data == 'error koneksi') {
-			koneksi = false;
-			$('#update strong.update_data').html('Koneksi gagal. Mencoba re-connect beberapa saat lagi.');
+			$('#update strong.update_data').html('Koneksi gagal. Reconnecting...');
 		} else if ($('#update strong.update_data').html() !== data) {
-			koneksi = true;
-			
 			$('#update strong.update_data').html(data);
 			update_ring();
 			
 			latest_entries();
 			panggil_data();
 			pilihan_kedua();
+			koreksi();
+			if (filter_pil2 !== '') detil_pil_2(filter_pil2);
 		}
 		
 		$('#update .updating').hide();
