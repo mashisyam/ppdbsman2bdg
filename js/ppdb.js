@@ -49,9 +49,10 @@ function tanggal_pendaftaran(data) {
 }
 
 function table_maker(table, array, jenis) {
+	
 	var tr = '',
 	    o  = '<thead><tr><th width="100">';
-	    o += (jenis == 'last' ? 'ID Database' : 'Posisi Global');
+	    o += (jenis == 'last' ? 'ID Database' : (jenis == 'filter' ? 'Nomor' : 'Posisi Global'));
 	    o += '</th><th width="100">ID Pendaftar</th><th width="300">Nama Lengkap</th><th>Asal Sekolah</th><th width="60">Nilai</th><th width="80">Detil</th></tr></thead><tbody>';
 	
 	var data = $.parseJSON(array);
@@ -69,6 +70,22 @@ function table_maker(table, array, jenis) {
 	
 	table.html(o + data + '</tbody>');
 }
+function pilihan_kedua() {
+	$('#pilihankedua .updating').show();
+	
+	$.get(utama + 'pilihan_2.php', function(data) {
+		var array = $.parseJSON(data), tr = '', o = '';
+		
+		$.each(array, function(k,a) {
+			tr  = "<tr onclick=\"javascript:detil_pil_2('" + a.pilihan_2 + "')\">";
+			tr += '<td align="center">' + nama_pil_2(a.pilihan_2) + '</td><td align="center"><strong>' + a.total + ' orang</strong></td></tr>';
+			o += tr;
+		});
+		
+		$('#pilihankedua tbody').html(o);
+		$('#pilihankedua .updating').hide();
+	});
+}
 function latest_entries() {
 	$('#latest .updating').show();
 	
@@ -76,6 +93,39 @@ function latest_entries() {
 		table_maker($('#latest > table'), data, 'last');
 		$('#latest .updating').hide();
 	});
+}
+function filter(kriteria, penentu, holder_isi, holder_update, holder_penentu) {
+	if (holder_update !== '') holder_update.show();
+	
+	var holder_penentu_value = (kriteria == 'pilihan_2' ? nama_pil_2(penentu) : penentu);
+	if (holder_penentu !== '') holder_penentu.html(holder_penentu_value);
+	
+	$.get(utama + 'filter.php?kriteria=' + kriteria + '&value=' + penentu, function(data) {
+		table_maker(holder_isi, data, 'filter');
+		if (holder_update !== '') holder_update.hide();
+	});
+}
+function detil_pil_2(sekolah) {
+	$('#detilkedua').fadeIn('slow');
+	filter('pilihan_2', sekolah, $('#detilkedua table'), $('#detilkedua .updating'), $('#detilkedua h2 strong'));
+}
+function rentang(awal, akhir) {
+	$('#rentang .updating').show();
+	
+	$.get(utama + 'rentang.php?awal=' + awal + '&akhir=' + akhir, function(data) {
+		var i = 0;
+		
+		table_maker($('#rentang table'), data, 'filter');
+		
+		var hitung = $.parseJSON(data);
+		$.each(hitung, function(k,a) { i++; });
+		$('#hasil_count_rentang').html('Ada ' + i + ' orang dengan rentang NEM di atas.');
+		
+		$('#rentang .updating').hide();
+	});
+}
+function cari_nama(nama) {
+	filter('nama_pendaftar', nama, $('#cari_nama table'), $('#findnama .updating'), '');
 }
 function panggil_data() {
 	var pendaftar_dalam = 0,
@@ -121,6 +171,7 @@ function cek_update() {
 			
 			latest_entries();
 			panggil_data();
+			pilihan_kedua();
 		}
 		
 		$('#update .updating').hide();
@@ -159,8 +210,7 @@ function nama_pil_2(data) {
 }
 function detil(identifier) {
 	$('#popup').fadeIn('slow');
-	$('#popup .load_big').show();
-	$('#detil table').hide();
+	$('#popup .updating').show();
 	
 	var tr = '';
 	
@@ -193,8 +243,7 @@ function detil(identifier) {
 		
 		$('#detil_posisi').html(tr);
 		
-		$('#detil table').show();
-		$('#popup .load_big').hide();
+		$('#popup .updating').hide();
 	});
 }
 function switchpage(page) {
@@ -222,8 +271,24 @@ $(function() {
 	setInterval('cek_update()', 5000);
 	setInterval('cek_app()', 5000);
 	
+	$('#cari_nomor .nomor_pendaftaran').mask('999-9999');
+	$('#cari_nem input[type="text"]').mask('99.99');
+	
 	/** Kode untuk close popup. */
 	$('#popup .close').click(function() {
 		$('#popup').fadeOut('slow');
+	});
+	
+	$('#cari_nomor').submit(function() {
+		detil($('#cari_nomor .nomor_pendaftaran').val());
+		return false;
+	});
+	$('#cari_nem').submit(function() {
+		rentang($('#cari_nem .nem_awal').val(), $('#cari_nem .nem_akhir').val());
+		return false;
+	});
+	$('#cari_nama').submit(function() {
+		cari_nama($('#cari_nama .nama_pendaftar').val());
+		return false;
 	});
 });

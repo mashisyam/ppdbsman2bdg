@@ -10,6 +10,7 @@
 	
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
 	<script src="./js/jquery.js"></script>
+	<script src="./js/mask.js"></script>
 	<script src="./js/ppdb.js?v=1.2"></script>
 </head>
 <body>
@@ -80,15 +81,27 @@
 		<div id="page2" style="display: none;">
 			<div class="box">
 				<h2><span>Pencarian Berdasarkan Nomor Pendaftaran.</span> Masukkan nomor pendaftaran Anda.</h2>
-				
+				<form id="cari_nomor">
+					<input type="text" class="nomor_pendaftaran" />
+					<input type="submit" value="Tampilkan Data dan Posisi" />
+				</form>
 			</div>
-			<div class="box">
-				<h2><span>Pencarian Berdasarkan Nama.</span> Masukkan nama Anda.</h2>
-				
+			<div id="findnama" class="box">
+				<h2><span>Pencarian Berdasarkan Nama.</span> Masukkan nama Anda.<span class="updating">Mencari data...</span></h2>
+				<form id="cari_nama">
+					<input type="text" class="nama_pendaftar" />
+					<input type="submit" value="Cari Data" />
+					<table></table>
+				</form>
 			</div>
-			<div class="box">
-				<h2><span>Pencarian Berdasarkan Rentangan Nilai.</span> Masukkan rentang nilai yang ingin dicari.</h2>
-				
+			<div id="rentang" class="box">
+				<h2><span>Pencarian Berdasarkan Rentangan Nilai.</span> Contoh: jumlah pendaftar dengan NEM 35.00 - 40.00.<span class="updating">Mencari data...</span></h2>
+				<form id="cari_nem">
+					Dari NEM <input type="text" class="nem_awal" style="width: 120px" /> hingga NEM <input type="text" class="nem_akhir" style="width: 120px" />
+					<input type="submit" value="Tampilkan Jumlah Pendaftar" />
+					<strong id="hasil_count_rentang"></strong>
+					<table></table>
+				</form>
 			</div>
 		</div>
 		<div id="page3" style="display: none;">
@@ -98,9 +111,16 @@
 			</div>
 		</div>
 		<div id="page4" style="display: none;">
-			<div class="box">
-				<h2><span>Statistik Pilihan Kedua.</span> Statistik pilihan kedua yang dipilih oleh para pendaftar.</h2>
-				
+			<div id="pilihankedua" class="box">
+				<h2><span>Statistik Pilihan Kedua.</span> Statistik pilihan kedua yang dipilih oleh para pendaftar. Bukan data limpahan!<span class="updating">Memperbarui data...</span></h2>
+				<table>
+					<thead><tr><th>Nama Sekolah</th><th>Jumlah Pendaftar</th></tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<div id="detilkedua" class="box" style="display: none; ">
+				<h2><span>Daftar Pendaftar Pilihan Kedua: <strong></strong>.</span> Pilih dari daftar di atas.<span class="updating">Loading...</span></h2>
+				<table></table>
 			</div>
 		</div>
 	</div>
@@ -111,8 +131,7 @@
 	</div>
 	<div id="popup">
 		<div id="detil" class="box">
-			<div class="close">&times;</div><h2><span>Data Pendaftar.</span> Data lengkap dari pendaftar yang sudah dipilih.</h2>
-			<div class="load_big"></div>
+			<div class="close">&times;</div><h2><span>Data Pendaftar.</span> Data lengkap dari pendaftar yang sudah dipilih.<span class="updating">&nbsp;</span></h2>
 			<table id="detil_pribadi"></table>
 			<table id="detil_nilai"></table>
 			<table id="detil_posisi"></table>

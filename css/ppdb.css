@@ -46,6 +46,7 @@ body {
 #subheader ul li:last-child {
 	float: right;
 	margin: 0;
+	cursor: auto;
 }
 #subheader ul li:last-child .updating {
 	float: none;
@@ -54,6 +55,7 @@ body {
 #subheader ul li.active {
 	font-weight: 700;
 	color: #538919;
+	text-shadow: 1px 1px 0 #ccc;
 }
 .box {
 	width: 880px;
@@ -80,6 +82,9 @@ h2 span {
 	font-weight: 600;
 	display: none;
 	font-size: 13px;
+}
+#popup .updating {
+	margin: 4px 5px 0 0;
 }
 #main table {
 	margin: 10px -10px -10px;
@@ -230,6 +235,29 @@ h2 span {
 #rekap tbody tr:hover { background: inherit; }
 #rekap tr td { cursor: default; }
 
+form {
+	padding: 10px 0 0;
+	text-align: center;
+}
+input[type="text"] {
+	font-family: 'Open Sans', sans-serif;
+	border: 1px solid #92bc64;
+	font-size: 36px;
+	text-align: center;
+}
+input[type="submit"] {
+	font-family: 'Open Sans', sans-serif;
+	border: 1px solid #92bc64;
+	font-size: 24px;
+	padding: 9px;
+}
+#page2 strong {
+	display: block;
+	font-size: 16px;
+	font-weight: 600;
+	margin: 10px 0;
+}
+
 #footer {
 	background: #385716;
 	opacity: 0.9;
@@ -241,6 +269,6 @@ h2 span {
 	width: 100%;
 	font-size: 12px;
 	line-height: 16px;
-	box-shadow: 0 0 10px #000a;
+	box-shadow: 0 0 10px #000;
 	-moz-box-shadow: 0 0 10px #000; 
 }
