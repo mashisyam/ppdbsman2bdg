@@ -4,7 +4,7 @@ include_once('./php/koneksi.php');
 
 if (isset($_POST['submit'])) {
 	if ($_POST['password'] == 'Ch@rets173') {
-		$query = mysql_query("insert into koreksi (keterangan, editor) values ('" . mysql_escape_string($_POST['editor']) . "', '" . mysql_escape_string($_POST['editor']) . "')");
+		$query = mysql_query("insert into koreksi (keterangan, editor) values ('" . mysql_escape_string($_POST['keterangan']) . "', '" . mysql_escape_string($_POST['editor']) . "')");
 		if ($query) { echo "kueri berhasil"; } else { echo "gagal"; }
 	} else { echo "salah pass"; }
 }
@@ -16,11 +16,11 @@ if (isset($_POST['submit'])) {
 	<table border="0">
 		<tr>
 			<td>Keterangan:</td>
-			<td><input type="text" name="keterangan" /></td>
+			<td><input type="text" name="keterangan"  style="width: 700px;" /></td>
 		</tr>
 		<tr>
 			<td>Editor:</td>
-			<td><input type="text" name="editor" maxlength="100" /></td>
+			<td><input type="text" name="editor" maxlength="11" /></td>
 		</tr>
 		<tr>
 			<td>Password:</td>

@@ -8,7 +8,8 @@ var utama = './php/',
     rentang_akhir = '',
     filter_nama = '',
     statistik = '',
-    versi = '';
+    versi = '',
+    id_detil = '';
 
 function tanggal_indonesia(data) {
 	var tahun = data.substr(0,4),
@@ -98,12 +99,16 @@ function koreksi() {
 	$.get(utama + 'koreksi.php', function(data) {
 		var array = $.parseJSON(data), tr = '', o = '', i = 0;
 		
-		$.each(array, function(k,a) {
-			tr  = "<tr>";
-			tr += '<td align="center">' + a.id + '</td><td align="center">' + a.date + '</td><td>' + a.keterangan + '</td><td>' + a.editor + '</td></tr>';
-			o += tr;
-			i++;
-		});
+		if (array !== null) {
+			$.each(array, function(k,a) {
+				tr  = "<tr>";
+				tr += '<td align="center">' + a.id + '</td><td align="center">' + a.date + '</td><td>' + a.keterangan + '</td><td align="center">' + a.editor + '</td></tr>';
+				o += tr;
+				i++;
+			});
+		} else {
+			o = '<tr><td align="center" colspan="4">Belum ada data koreksi yang disubmit.</td></tr>';
+		}
 		
 		$('#koreksi tbody').html(o);
 		$('#count_koreksi').html(i);
@@ -209,6 +214,7 @@ function cek_update() {
 			if (filter_pil2 !== '') detil_pil_2(filter_pil2);
 			if (rentang_awal !== '' && rentang_akhir !== '') rentang(rentang_awal, rentang_akhir);
 			if (filter_nama !== '') cari_nama($(filter_nama).val());
+			if (id_detil !== '') detil(id_detil);
 		}
 		
 		$('#update .updating').hide();
@@ -246,6 +252,7 @@ function nama_pil_2(data) {
 	}
 }
 function detil(identifier) {
+	id_detil = identifier;
 	$('#popup').fadeIn('slow');
 	$('#popup .updating').show();
 	
@@ -314,6 +321,7 @@ $(function() {
 	/** Kode untuk close popup. */
 	$('#popup .close').click(function() {
 		$('#popup').fadeOut('slow');
+		id_detil = '';
 	});
 	
 	$('#cari_nomor').submit(function() {
@@ -332,7 +340,6 @@ $(function() {
 	/** Submenu tweak: Nagging effect! */
 	var menu = $('#subheader'), menu_pos = menu.offset();
 	$(window).scroll(function() {
-		console.log('scroll');
 		if ($(this).scrollTop() > menu_pos.top && menu.hasClass('normal')) {
 			menu.removeClass('normal').addClass('stay_on_top');
 		} else if ($(this).scrollTop() <= (menu_pos.top + menu.height()) && menu.hasClass('stay_on_top')) {
