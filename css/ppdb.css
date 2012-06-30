@@ -32,6 +32,13 @@ body {
 	border-bottom: 1px solid #92bc64;
 	padding: 8px 0;
 	margin: 1px 0 0;
+	width: 100%;
+	position: absolute;
+}
+#subheader.stay_on_top {
+	position: fixed;
+	top: 0;
+	z-index: 99999;
 }
 #subheader ul {
 	width: 900px;
@@ -85,6 +92,9 @@ h2 span {
 }
 #popup .updating {
 	margin: 4px 5px 0 0;
+}
+#main {
+	margin-top: 40px;
 }
 #main table {
 	margin: 10px -10px -10px;
@@ -145,7 +155,7 @@ h2 span {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 999;
+	z-index: 999999;
 	height: 100%;
 	width: 100%;
 	display: none;

@@ -1,3 +1,4 @@
+<!-- I present this for someone important... Anjani :') -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,18 +12,19 @@
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
 	<script src="./js/jquery.js"></script>
 	<script src="./js/mask.js"></script>
-	<script src="./js/ppdb.js?v=1.2"></script>
+	<script src="./js/ppdb.js?v=1.3"></script>
 </head>
 <body>
 	<div id="header">
 		<h1>PPDB Jalur Akademik 2012 - SMA Negeri 2 Bandung</h1>
 	</div>
-	<div id="subheader">
+	<div id="subheader" class="normal">
 		<ul>
 			<li onclick="javascript:switchpage('1')" class="menupage1 active">Beranda</li>
 			<li onclick="javascript:switchpage('2')" class="menupage2">Pencarian</li>
 			<li onclick="javascript:switchpage('3')" class="menupage3">Daftar Koreksi Data</li>
 			<li onclick="javascript:switchpage('4')" class="menupage4">Statistik Pilihan Kedua</li>
+			<li onclick="javascript:location.reload(true);">Reset Viewer</li>
 			<li id="update"><span class="updating"></span>Update: <strong class="update_data">[ loading ]</strong>. Versi viewer: <strong class="versi_app">0.0</strong></li>
 		</ul>
 		<div class="cl"></div>
@@ -44,6 +46,16 @@
 						<th>Nilai Tertinggi</th>
 						<th>Nilai Terendah</th>
 					</tr>
+					<!--<tr>
+						<th colspan="2">Jumlah Pendaftar</th>
+						<th colspan="2">Passing Grade Sementara</th>
+					</tr>
+					<tr>
+						<th>Kota Bandung</th>
+						<th>Luar Kota Bandung</th>
+						<th>Kota Bandung</th>
+						<th>Luar Kota Bandung</th>
+					</tr>-->
 				</thead>
 				<tbody>
 					<tr>
@@ -59,7 +71,8 @@
 							<sup>1</sup> Jumlah pendaftar adalah total seluruh pendaftar PPDB Jalur Akademik. <strong style="color: red">BUKAN QUOTA PENDAFTARAN!!!</strong><br />
 							<sup>2</sup> Nilai tertinggi merupakan nilai tertinggi dari seluruh pendaftar yang ada di lingkup tersebut.<br />
 							<sup>3</sup> Nilai terendah merupakan nilai terendah dari seluruh pendaftar yang ada di lingkup tersebut. <strong style="color: red">BUKAN PASSING GRADE!!!</strong><br />
-							<sup>4</sup> Ada <span id="count_koreksi" style="font-weight: bold; font-family: monospace; font-size: 14px;">0</span> koreksi data yang telah diperbaiki oleh panitia. Klik "Daftar Koreksi Data" di atas untuk mengetahuinya.
+							<sup>4</sup> Ada <span id="count_koreksi" style="font-weight: bold; font-family: monospace; font-size: 14px;">0</span> koreksi data yang telah diperbaiki oleh panitia. Klik "Daftar Koreksi Data" di atas untuk mengetahuinya.<!--<br />
+							<sup>1</sup> Passing grade sementara mengambil nilai terendah di batas kuota (total kuota = 316 orang). Sesuai petunjuk teknis, passing grade untuk luar kota harus di atas dalam kota. Cara perhitungan yang sama diterapkan di situs PPDB Kota Bandung.-->
 						</td>
 					</tr>
 				</tbody>
@@ -147,5 +160,3 @@
 <audio src="./audio/update.wav" id="audioupdate" />
 </body>
 </html>
-
-<!-- Aku belum bisa melupakanmu seutuhnya, Anjani... dan selamat berbahagia :') -->

@@ -1,14 +1,13 @@
 /**
- * Sistem Informasi Perkembangan Pendaftaran Penerimaan Peserta Didik Baru 2012
- * Sekolah Menengah Atas (SMA) Negeri 2 Bandung
- * Jalan Cihampelas no. 173 Bandung 40131 - Telp. (022) 2032462
- * 
- * Dikelola oleh Divisi Teknologi Informasi dan Komunikasi - SMA Negeri 2 Bandung
- * Sistem dibuat oleh Muhammad Saiful Islam <muhammad@saiful.web.id>
+ * I present this for someone important... Anjani :')
  */
 
 var utama = './php/',
     filter_pil2 = '',
+    rentang_awal = '',
+    rentang_akhir = '',
+    filter_nama = '',
+    statistik = '',
     versi = '';
 
 function tanggal_indonesia(data) {
@@ -138,6 +137,9 @@ function detil_pil_2(sekolah) {
 function rentang(awal, akhir) {
 	$('#rentang .updating').show();
 	
+	rentang_awal = awal;
+	rentang_akhir = akhir;
+	
 	$.get(utama + 'rentang.php?awal=' + awal + '&akhir=' + akhir, function(data) {
 		var i = 0;
 		
@@ -151,6 +153,7 @@ function rentang(awal, akhir) {
 	});
 }
 function cari_nama(nama) {
+	filter_nama = nama;
 	filter('nama_pendaftar', nama, $('#cari_nama table'), $('#findnama .updating'), '');
 }
 function panggil_data() {
@@ -159,7 +162,10 @@ function panggil_data() {
 	    low_dalam = '0.00',
 	    pendaftar_luar = 0,
 	    high_luar = '0.00',
-	    low_luar = '0.00';
+	    low_luar = '0.00',
+	    pgs_dalam = '0.00',
+	    pgs_luar = '0,00',
+	    i = 0;
 	
 	$('#data .updating').show();
 	
@@ -169,18 +175,22 @@ function panggil_data() {
 		
 		var rkp = $.parseJSON(data);
 		$.each(rkp, function(k,a) {
+			i++;
 			if (a.asal_pendaftar == '0') {
 				pendaftar_dalam++;
 				high_dalam = (high_dalam == '0.00' ? a.n_total : high_dalam);
 				low_dalam = a.n_total;
+				//if (i <= 316) pgs_dalam = a.n_total;
 			} else {
 				pendaftar_luar++;
 				high_luar = (high_luar == '0.00' ? a.n_total : high_luar);
 				low_luar = a.n_total;
+				//if (i <= 316) pgs_luar = a.n_total;
 			}
 		});
 		
 		$('#rekap tbody tr:first-child').html('<td>' + pendaftar_dalam + '</td><td>' + high_dalam + '</td><td>' + low_dalam + '</td><td>' + pendaftar_luar + '</td><td>' + high_luar + '</td><td>' + low_luar + '</td>');
+		//$('#rekap tbody tr:first-child').html('<td>' + pendaftar_dalam + ' orang</td><td>' + pendaftar_luar + ' orang</td><td>' + pgs_dalam + '</td><td>' + pgs_luar + '</td>');
 	});
 }
 function cek_update() {
@@ -197,6 +207,8 @@ function cek_update() {
 			pilihan_kedua();
 			koreksi();
 			if (filter_pil2 !== '') detil_pil_2(filter_pil2);
+			if (rentang_awal !== '' && rentang_akhir !== '') rentang(rentang_awal, rentang_akhir);
+			if (filter_nama !== '') cari_nama($(filter_nama).val());
 		}
 		
 		$('#update .updating').hide();
@@ -294,7 +306,7 @@ $(function() {
 	
 	/** Update setiap 5 detik * 1.000 ms = 30.000 ms */
 	setInterval('cek_update()', 5000);
-	setInterval('cek_app()', 5000);
+	setInterval('cek_app()', 60000);
 	
 	$('#cari_nomor .nomor_pendaftaran').mask('999-9999');
 	$('#cari_nem input[type="text"]').mask('99.99');
@@ -315,5 +327,16 @@ $(function() {
 	$('#cari_nama').submit(function() {
 		cari_nama($('#cari_nama .nama_pendaftar').val());
 		return false;
+	});
+	
+	/** Submenu tweak: Nagging effect! */
+	var menu = $('#subheader'), menu_pos = menu.offset();
+	$(window).scroll(function() {
+		console.log('scroll');
+		if ($(this).scrollTop() > menu_pos.top && menu.hasClass('normal')) {
+			menu.removeClass('normal').addClass('stay_on_top');
+		} else if ($(this).scrollTop() <= (menu_pos.top + menu.height()) && menu.hasClass('stay_on_top')) {
+			menu.removeClass('stay_on_top').addClass('normal');
+		}
 	});
 });
